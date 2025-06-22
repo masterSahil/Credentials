@@ -167,4 +167,7 @@
     .web-creds-fields input, .web-creds-fields textarea{
         width: 75vw !important;
     }
+    .media-each-content{
+        cursor: none;
+    }
 }

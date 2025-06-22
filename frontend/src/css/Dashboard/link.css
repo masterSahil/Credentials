@@ -162,4 +162,18 @@
   .stored-linking-creds h1{
     font-size: 24px;
   }
+  .stored-linking-creds {
+    width: 92vw;
+  }
+  .link-value, .link-url{
+    margin-bottom: 8px;
+    font-size: 17px;
+  }
+  .link-cred-container{
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .link-cred-container:hover{
+    cursor: none;
+  }
 }
