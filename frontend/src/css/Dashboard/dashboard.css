@@ -188,11 +188,11 @@ input[type="file"]{
         padding: 5vw;
     }
     .sub-creds{
-        padding: 15px 3vw 3vw 3vw;
+        padding: 15px 5vw 3vw 4vw;
         margin: 4.5vw auto;
-        &:hover{
-            cursor: none;
-        }
+    }
+    .sub-creds:hover{
+        cursor: none !important;
     }
     .sub-creds p{
         margin: 0 0 8px;
