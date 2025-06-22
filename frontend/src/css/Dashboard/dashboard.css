@@ -190,6 +190,7 @@ input[type="file"]{
     .sub-creds{
         padding: 15px 5vw 3vw 4vw;
         margin: 4.5vw auto;
+        -webkit-tap-highlight-color: transparent;
     }
     .sub-creds:hover{
         cursor: none !important;
