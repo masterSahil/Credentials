@@ -11,7 +11,7 @@ const EditLink = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const URL = "http://localhost:3000/link";
+    const URL = "https://credentials-zpxg.onrender.com/link";
 
     const [formData, setFormData] = useState({
         plateform: '',
@@ -22,9 +22,12 @@ const EditLink = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [messageType, setMessageType] = useState('');
     const [message, setMessage] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const getData = async () => {
         try {
+            setLoading(true); setMessage(true); setMessageType("success");
+            setSuccessMsg("Loading Your Data ...");
             const res = await axios.get(URL);
             const linkData = res.data.link;
             const found = linkData.find(link => link._id === id);
@@ -42,6 +45,8 @@ const EditLink = () => {
             setTimeout(() => {
                 setMessage(false);
             }, 3000);
+        } finally {
+            setLoading(false); setMessage(false);
         }
     };
 
@@ -78,7 +83,7 @@ const EditLink = () => {
 
     return (
         <>
-            {message && (
+            {(message || loading) && (
                 <div className={`toast-msg ${messageType}`}>
                 <div className="progress-bar"></div>
                 <span className="icon">

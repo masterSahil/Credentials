@@ -9,6 +9,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import defaultImg from '../../assets/imgs/default.png';
 import filesImg from '../../assets/imgs/files.png';
+import LoaderSpinner from '../loader/loader';
 
 const Medias = () => {
 
@@ -36,7 +37,7 @@ const Medias = () => {
     setData(prev => ({ ...prev, [name]: type === "file" ? files[0] : value }));
   }
 
-  const URL = "http://localhost:3000/img";
+  const URL = "https://credentials-zpxg.onrender.com/img";
 
   const uniqueId = localStorage.getItem("uniqueId");
 
@@ -199,13 +200,16 @@ const Medias = () => {
           </form>
 
           <div className="media-contents">
-            {loadingError && dataFetched && <p className="media-info-msg">Network error. Please check your internet connection.</p>}
-            {!loadingError && dataFetched && IMG.length === 0 && <p className="media-info-msg">No uploaded files found yet.</p>}
-            {
-              !loadingError && IMG.length > 0 && IMG.map((val, key) => {
-                const filePath = `http://localhost:3000/uploads/${val.image}`;
+            {!dataFetched ? (
+              <LoaderSpinner />
+            ) : loadingError ? (
+              <p className="media-info-msg">Network error. Please check your internet connection.</p>
+            ) : IMG.length === 0 ? (
+              <p className="media-info-msg">No uploaded files found yet.</p>
+            ) : (
+              IMG.map((val, key) => {
+                const filePath = `https://credentials-zpxg.onrender.com/uploads/${val.image}`;
                 const extension = val.image ? val.image.split('.').pop().toLowerCase() : '';
-
                 const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension);
                 const isVideo = ['mp4', 'webm', 'ogg'].includes(extension);
                 const isPdf = extension === 'pdf';
@@ -228,7 +232,6 @@ const Medias = () => {
                       <img src={filesImg} alt="Unknown File" />
                     )}
 
-
                     <h1>{val.name}</h1>
                     <p className="truncate-desc">{val.desc ? val.desc : "N/A"}</p>
                     <div className="media-icons">
@@ -238,8 +241,9 @@ const Medias = () => {
                   </div>
                 );
               })
-            }
+            )}
           </div>
+
         </div>
       </div>
     </>

@@ -23,25 +23,25 @@ const EditMedia = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [messageType, setMessageType] = useState('');
   const [message, setMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const URL = "http://localhost:3000/img";
-  const IMAGE_URL = "http://localhost:3000/image";
+  const URL = "https://credentials-zpxg.onrender.com/img";
+  const IMAGE_URL = "https://credentials-zpxg.onrender.com/image";
 
   const getData = async () => {
     try {
+      setLoading(true); setMessage(true); setMessageType("success");
+      setSuccessMsg("Loading Your Data ...");
       const res = await axios.get(URL);
-
       const data = res.data.data;
-
       for(let img of data)
       {
         if (img._id == id) {
           setImgData(img);
         }
       }
-
     } catch (error) {
       setMessage(true);
       setMessageType("error");
@@ -50,6 +50,8 @@ const EditMedia = () => {
       setTimeout(() => {
         setMessage(false);
       }, 3000);
+    } finally {
+      setLoading(false); setMessage(false);
     }
   }
 
@@ -146,10 +148,10 @@ const EditMedia = () => {
 
   const handleDownload = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/check/${id}`);
+      const response = await axios.get(`https://credentials-zpxg.onrender.com/check/${id}`);
 
       if (response.data.exists) {
-        window.location.href = `http://localhost:3000/download/${id}`;
+        window.location.href = `https://credentials-zpxg.onrender.com/download/${id}`;
       } else {
         setMessage(true);
         setMessageType("error");
@@ -179,7 +181,7 @@ const EditMedia = () => {
     let fileURL = '', ext = '';
 
     if (typeof file === 'string') {
-      fileURL = `http://localhost:3000/uploads/${file}`;
+      fileURL = `https://credentials-zpxg.onrender.com/uploads/${file}`;
       ext = getExt(file);
     } else if (file && file.name && typeof file.name === 'string') 
     {

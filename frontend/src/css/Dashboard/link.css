@@ -54,7 +54,11 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 }
-
+.loading-contains{
+  display: flex;
+  justify-content: center;
+  min-width: -webkit-fill-available;
+}
 
 .crud-opt {
   position: absolute;

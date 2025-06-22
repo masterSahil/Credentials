@@ -26,7 +26,7 @@ const SignUp = () => {
         setUser(prev => ({...prev, [e.target.name]: e.target.value}))
     }
 
-    const URL = "http://localhost:3000/users";
+    const URL = "https://credentials-zpxg.onrender.com/users";
 
     const submit = async (e) => {
         e.preventDefault();

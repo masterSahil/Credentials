@@ -108,7 +108,11 @@ input[type="file"]{
   position: relative;
   min-width: 18vw;
 }
-
+.loading-contains{
+  display: flex;
+  justify-content: center;
+  min-width: -webkit-fill-available;
+}
 .sub-creds:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(113, 132, 255, 0.3);

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
+import LoaderSpinner from '../loader/loader';
 
 const Settings = () => {
 
@@ -20,7 +21,7 @@ const Settings = () => {
 
     const [pId, setPId] = useState('');
     const [visible, setVisible] = useState('');
-
+    const [loading, setLoading] = useState(true);
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [messageType, setMessageType] = useState('');
@@ -28,9 +29,13 @@ const Settings = () => {
 
     const id = localStorage.getItem("uniqueId");
 
-    const URL = "http://localhost:3000/users";
+    const URL = "https://credentials-zpxg.onrender.com/users";
 
     const getData = async () => {
+      setLoading(true)
+      setMessage(true)
+      setMessageType("success");
+      setSuccessMsg("Loading Your Data ...");
       try {
         const res = await axios.get(URL);
 
@@ -58,6 +63,9 @@ const Settings = () => {
         setTimeout(() => {
           setMessage(false);
         }, 3000);
+      } finally {
+        setLoading(false);
+        setMessage(false);
       }
     }
 
@@ -95,7 +103,7 @@ const Settings = () => {
 
   return (
     <>
-      {message && (
+      {(message || loading) && (
         <div className={`toast-msg ${messageType}`}>
           <div className="progress-bar"></div>
           <span className="icon">

@@ -7,6 +7,7 @@ import { FaEdit, FaEye, FaEyeSlash, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
 import '../../css/toaster/toaster.css'
+import LoaderSpinner from '../loader/loader';
 
 const Dashboard = () => {
     const [userName, setUserName] = useState('');
@@ -25,11 +26,11 @@ const Dashboard = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [messageType, setMessageType] = useState('');
     const [message, setMessage] = useState(false);
-
+    const [loading, setLoading] = useState(true);
     const [revealMap, setRevealMap] = useState({});
 
-    const URL_USERS = "http://localhost:3000/users";
-    const URL_WEB = "http://localhost:3000/web";
+    const URL_USERS = "https://credentials-zpxg.onrender.com/users";
+    const URL_WEB = "https://credentials-zpxg.onrender.com/web";
 
     const navigate = useNavigate();
 
@@ -43,8 +44,7 @@ const Dashboard = () => {
 
     const getData = async () => {
         try {
-            setLoadingError(false);
-            setDataFetched(false);
+            setLoading(true); setLoadingError(false); setDataFetched(false);
 
             const resUsers = await axios.get(URL_USERS);
             const resWeb = await axios.get(URL_WEB);
@@ -82,6 +82,8 @@ const Dashboard = () => {
             setMessageType("error");
             setErrorMsg("Error fetching user or credentials data");
             setTimeout(() => setMessage(false), 3000);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -230,37 +232,45 @@ const Dashboard = () => {
                         <h2>Your Stored Credentials</h2>
 
                         <div className="card-creds" >
-                            {loadingError && dataFetched && <p className="media-info-msg">Network error. Please check your internet connection.</p>}
-                            {!loadingError && dataFetched && credData.length === 0 && <p className="media-info-msg">No credentials stored yet.</p>}
-                            {!loadingError && credData.length > 0 && credData.map((val, key) => (
-                                <div className="sub-creds" key={key} >
-                                    <div className="crud-opt">
-                                        <FaEdit title='Edit' className="icon edit-icon" onClick={() => handleEdit(val._id)} />
-                                        <FaTrashAlt title='Delete' className="icon delete-icon" 
-                                            onClick={() => handleDelete(val._id)} />
-                                    </div>
-                                    <h3>Website Name</h3>
-                                    <p>{val.webName || "Not/Available"}</p>
-                                    <h3>User Name</h3>
-                                    <p>{val.userName || "Not/Available"}</p>
-                                    <h3>Email</h3>
-                                    <p>{val.email || "Not/Available"}</p>
-                                    <h3>Password</h3>
-                                    <p>
-                                        <span className='password-span'>
-                                            {revealMap[val._id] ? (
-                                                <>
-                                                    {val.password} <FaEyeSlash onClick={() => toggleReveal(val._id)} />
-                                                </>
-                                            ) : (
-                                                <>
-                                                    ******** <FaEye onClick={() => toggleReveal(val._id)} />
-                                                </>
-                                            )}
-                                        </span>
-                                    </p>
+                            {loading ? (
+                                <div className='loading-contains'>
+                                    <LoaderSpinner />
                                 </div>
-                            ))}
+                            ) : loadingError ? (
+                                <p className="media-info-msg">Network error. Please check your internet connection.</p>
+                            ) : credData.length === 0 ? (
+                                <p className="media-info-msg">No credentials stored yet.</p>
+                            ) : (
+                                credData.map((val, key) => (
+                                    <div className="sub-creds" key={key}>
+                                        <div className="crud-opt">
+                                            <FaEdit title='Edit' className="icon edit-icon" onClick={() => handleEdit(val._id)} />
+                                            <FaTrashAlt title='Delete' className="icon delete-icon" onClick={() => handleDelete(val._id)} />
+                                        </div>
+                                        <h3>Website Name</h3>
+                                        <p>{val.webName || "Not/Available"}</p>
+                                        <h3>User Name</h3>
+                                        <p>{val.userName || "Not/Available"}</p>
+                                        <h3>Email</h3>
+                                        <p>{val.email || "Not/Available"}</p>
+                                        <h3>Password</h3>
+                                        <p>
+                                            <span className='password-span'>
+                                                {revealMap[val._id] ? (
+                                                    <>
+                                                        {val.password} <FaEyeSlash onClick={() => toggleReveal(val._id)} />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        ******** <FaEye onClick={() => toggleReveal(val._id)} />
+                                                    </>
+                                                )}
+                                            </span>
+                                        </p>
+                                    </div>
+                                ))
+                            )}
+
                         </div>
                     </div>
                 </div>

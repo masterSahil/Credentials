@@ -30,9 +30,9 @@
 }
 
 .toast-msg.success {
-  background-color: #ecfdf5;
-  border-left: 6px solid #10b981;
-  color: #065f46;
+  background-color: #e0f6ff;
+  border-left: 6px solid #1037b9;
+  color: #063a5f;
 }
 
 .toast-msg.error {
@@ -46,7 +46,7 @@
   bottom: -10%;
   left: 0;
   height: 4px;
-  background-color: rgb(0, 194, 6);
+  background-color: rgb(0, 52, 194);
   animation: shrinkBar 3s linear forwards;
   border-radius: 10px;
 }

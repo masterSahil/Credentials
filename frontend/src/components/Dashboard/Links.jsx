@@ -7,6 +7,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
+import LoaderSpinner from '../loader/loader';
 
 const Links = () => {
 
@@ -20,11 +21,11 @@ const Links = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [messageType, setMessageType] = useState('');
   const [message, setMessage] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
 
-  const LINK_URL = "http://localhost:3000/link";
+  const LINK_URL = "https://credentials-zpxg.onrender.com/link";
   const uniqueId = localStorage.getItem("uniqueId");
 
   const navigate = useNavigate();
@@ -114,7 +115,7 @@ const Links = () => {
 
   const getData = async () => {
     try {
-        setLoadingError(false); setDataFetched(false);
+        setLoading(true); setLoadingError(false); setDataFetched(false);
         const res = await axios.get(LINK_URL);
         const linksData = res.data.link;
 
@@ -133,6 +134,8 @@ const Links = () => {
         setMessageType("error");
         setErrorMsg("Network error. Please check your internet connection.");
         setTimeout(() => setMessage(false), 3000);
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -178,26 +181,34 @@ const Links = () => {
           
           <div className="stored-linking-creds">
               <h1>Stored Links</h1>
-              <div className="stored-link-creds-content">
-              {loadingError && dataFetched && <p className="media-info-msg">Network error. Please check your internet connection.</p>}
-              {!loadingError && dataFetched && linkCreds.length === 0 && <p className="media-info-msg">No saved links available.</p>}
-                { !loadingError && linkCreds.length > 0 && linkCreds.map((val, key) => (
-                    <div className="link-cred-container" key={key}>
-                      <div className="crud-opt">
-                        <FaEdit title='Edit' className="icon edit-icon" onClick={() => handleEdit(val._id)} />
-                        <FaTrashAlt title='Delete' className="icon delete-icon" 
-                            onClick={() => handleDelete(val._id)} />
-                      </div>
-                      <h2 className="link-title">Platform</h2>
-                      <p className="link-value">{val.plateform}</p>
-                      <h2 className="link-title">Link</h2>
-                      <a href={val.link} className="link-url"
-                        target="_blank" rel="noopener noreferrer" >
-                        {val.link}
-                      </a>
+            <div className="stored-link-creds-content">
+              {loading ? (
+                <div className='loading-contains'>
+                  <LoaderSpinner />
+                </div>
+              ) : loadingError ? (
+                <p className="media-info-msg">Network error. Please check your internet connection.</p>
+              ) : linkCreds.length === 0 ? (
+                <p className="media-info-msg">No saved links available.</p>
+              ) : (
+                linkCreds.map((val, key) => (
+                  <div className="link-cred-container" key={key}>
+                    <div className="crud-opt">
+                      <FaEdit title='Edit' className="icon edit-icon" onClick={() => handleEdit(val._id)} />
+                      <FaTrashAlt title='Delete' className="icon delete-icon"
+                        onClick={() => handleDelete(val._id)} />
                     </div>
-                  ))}
-              </div>
+                    <h2 className="link-title">Platform</h2>
+                    <p className="link-value">{val.plateform}</p>
+                    <h2 className="link-title">Link</h2>
+                    <a href={val.link} className="link-url" target="_blank" rel="noopener noreferrer">
+                      {val.link}
+                    </a>
+                  </div>
+                ))
+              )}
+            </div>
+
           </div>
 
         </div>

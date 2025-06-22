@@ -22,11 +22,14 @@ const Details = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [messageType, setMessageType] = useState('');
   const [message, setMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const URL = "http://localhost:3000/web";
+  const URL = "https://credentials-zpxg.onrender.com/web";
 
   const getData = async () => {
     try {
+      setLoading(true); setMessage(true); setMessageType("success"); 
+      setSuccessMsg("Loading Your Data ...");
       const res = await axios.get(URL);
       const webData = res.data.user;
       const found = webData.find(user => user._id === id);
@@ -46,6 +49,9 @@ const Details = () => {
         setTimeout(() => {
           setMessage(false);
         }, 3000);
+    } finally {
+      setMessage(false);
+      setLoading(false);
     }
   };
 
@@ -86,7 +92,7 @@ const Details = () => {
 
   return (
     <>
-      {message && (
+      {(message || loading) && (
         <div className={`toast-msg ${messageType}`}>
           <div className="progress-bar"></div>
           <span className="icon">

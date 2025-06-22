@@ -26,7 +26,7 @@ const Login = () => {
 
   const registerContext = useContext(registeredContext);
 
-  const URL = "http://localhost:3000/users";
+  const URL = "https://credentials-zpxg.onrender.com/users";
 
   const handleChange = (e) => {
     setData(prev => ({...prev, [e.target.name]: e.target.value}));
