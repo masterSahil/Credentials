@@ -3,11 +3,9 @@ import Menu from '../Menu/Menu'
 import '../../css/Dashboard/dashboard.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit, FaEye, FaEyeSlash, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
 import '../../css/toaster/toaster.css'
-import LoaderSpinner from '../loader/loader';
 
 const Dashboard = () => {
     const [userName, setUserName] = useState('');
@@ -17,44 +15,24 @@ const Dashboard = () => {
         email: '',
         password: '',
     });
-    const [credData, setCredData] = useState([]);
-
-    const [loadingError, setLoadingError] = useState(false);
-    const [dataFetched, setDataFetched] = useState(false);
     
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [messageType, setMessageType] = useState('');
     const [message, setMessage] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [revealMap, setRevealMap] = useState({});
 
     const URL_USERS = "https://credentials-zpxg.onrender.com/users";
     const URL_WEB = "https://credentials-zpxg.onrender.com/web";
 
     const navigate = useNavigate();
 
-    const toggleReveal = (id) => {
-        setRevealMap(prev => ({
-            ...prev,
-            [id]: !prev[id]
-        }));
-    };
-
-
     const getData = async () => {
         try {
-            setLoading(true); setLoadingError(false); setDataFetched(false);
-
             const resUsers = await axios.get(URL_USERS);
-            const resWeb = await axios.get(URL_WEB);
-
             let uniqueId = localStorage.getItem("uniqueId");
             const emailId = localStorage.getItem("emailId");
 
             let users = resUsers.data.user;
-            let allCreds = resWeb.data.user;
-
             if (uniqueId) {
                 const matchedUser = users.find(u => u.uniqueId === uniqueId);
                 if (matchedUser) {
@@ -67,23 +45,10 @@ const Dashboard = () => {
                     localStorage.setItem("uniqueId", matchedUserByEmail.uniqueId);
                 }
             }
-
-            if (uniqueId) {
-                const filteredCreds = allCreds.filter(cred => cred.uniqueId === uniqueId);
-                setCredData(filteredCreds);
-            } else {
-                setCredData([]);
-            }
-            setDataFetched(true);
         } catch (error) {
-            setLoadingError(true);
-            setDataFetched(true);
-            setMessage(true);
-            setMessageType("error");
+            setMessage(true); setMessageType("error");
             setErrorMsg("Error fetching user or credentials data");
             setTimeout(() => setMessage(false), 3000);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -113,10 +78,7 @@ const Dashboard = () => {
                 }, 3000);
                 return;
             }
-
-
             const newData = { ...userData, uniqueId };
-
             await axios.post(URL_WEB, newData);
             setMessage(true);
             setMessageType("success");
@@ -131,9 +93,6 @@ const Dashboard = () => {
                 email: '',
                 password: '',
             });
-
-            getData();
-
         } catch (error) {
             setMessage(true);
             setMessageType("error");
@@ -148,33 +107,6 @@ const Dashboard = () => {
     const handleChange = (e) => {
         setUserData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
-
-    const handleEdit = (id) => {
-        navigate(`/credential-details/${id}`);
-    }
-
-    const handleDelete = async(id) => {
-        try {
-            await axios.delete(`${URL_WEB}/${id}`);
-
-            setMessage(true);
-            setMessageType("success");
-            setSuccessMsg("Deleted Successfully");
-            getData();
-
-            setTimeout(() => {
-                setMessage(false);
-            }, 3000);
-        } catch (error) {
-            setMessage(true);
-            setMessageType("error");
-            setErrorMsg(error.message);
-
-            setTimeout(() => {
-                setMessage(false);
-            }, 3000);
-        }
-    }
 
     useEffect(() => {
         getData();
@@ -227,51 +159,14 @@ const Dashboard = () => {
                         </div>
                         <button className='btn' onClick={submit}>Save</button>
                     </div>
-
-                    <div className="creds">
-                        <h2>Your Stored Credentials</h2>
-
-                        <div className="card-creds" >
-                            {loading ? (
-                                <div className='loading-contains'>
-                                    <LoaderSpinner />
-                                </div>
-                            ) : loadingError ? (
-                                <p className="media-info-msg">Network error. Please check your internet connection.</p>
-                            ) : credData.length === 0 ? (
-                                <p className="media-info-msg">No credentials stored yet.</p>
-                            ) : (
-                                credData.map((val, key) => (
-                                    <div className="sub-creds" key={key}>
-                                        <div className="crud-opt">
-                                            <FaEdit title='Edit' className="icon edit-icon" onClick={() => handleEdit(val._id)} />
-                                            <FaTrashAlt title='Delete' className="icon delete-icon" onClick={() => handleDelete(val._id)} />
-                                        </div>
-                                        <h3>Website Name</h3>
-                                        <p>{val.webName || "Not/Available"}</p>
-                                        <h3>User Name</h3>
-                                        <p>{val.userName || "Not/Available"}</p>
-                                        <h3>Email</h3>
-                                        <p>{val.email || "Not/Available"}</p>
-                                        <h3>Password</h3>
-                                        <p>
-                                            <span className='password-span'>
-                                                {revealMap[val._id] ? (
-                                                    <>
-                                                        {val.password} <FaEyeSlash onClick={() => toggleReveal(val._id)} />
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        ******** <FaEye onClick={() => toggleReveal(val._id)} />
-                                                    </>
-                                                )}
-                                            </span>
-                                        </p>
-                                    </div>
-                                ))
-                            )}
-
+                    <div className="see-creds-card">
+                        <div className="see-creds-text">
+                            <h3>Want to check your saved credentials?</h3>
+                            <p>You can view, edit, or manage all your stored website logins securely.</p>
                         </div>
+                        <button className="see-creds-btn" onClick={() => navigate('/vault-creds')}>
+                            Go to Vault
+                        </button>
                     </div>
                 </div>
             </div>

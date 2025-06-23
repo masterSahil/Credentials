@@ -3,11 +3,9 @@ import Menu from '../Menu/Menu'
 import axios from 'axios';
 import '../../css/Dashboard/link.css';
 import '../../css/toaster/toaster.css';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
-import LoaderSpinner from '../loader/loader';
 
 const Links = () => {
 
@@ -16,14 +14,10 @@ const Links = () => {
     link: '',
   });
 
-  const [linkCreds, setLinkCreds] = useState([]);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [messageType, setMessageType] = useState('');
   const [message, setMessage] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [loadingError, setLoadingError] = useState(false);
-  const [dataFetched, setDataFetched] = useState(false);
 
   const LINK_URL = "https://credentials-zpxg.onrender.com/link";
   const uniqueId = localStorage.getItem("uniqueId");
@@ -32,7 +26,6 @@ const Links = () => {
 
   const submit = async () => {
     try {
-        const uniqueId = localStorage.getItem("uniqueId");
         if (!uniqueId) {
             setMessage(true);
             setMessageType("error");
@@ -85,65 +78,6 @@ const Links = () => {
   const handleChange = (e) => {
     setLinkData(prev => ({...prev, [e.target.name]: e.target.value}));
   }
-
-  const handleEdit = (id) => {
-      navigate(`/edit-cred-link/${id}`);
-  }
-
-  const handleDelete = async (id) => {
-    try {
-        await axios.delete(`${LINK_URL}/${id}`);
-
-        setMessage(true);
-        setMessageType("success");
-        setSuccessMsg("Credential Deleted Successfully ...");
-
-        setTimeout(() => {
-          setMessage(false);
-          window.location.reload();
-        }, 3000);
-    } catch (error) {
-        setMessage(true);
-        setMessageType("error");
-        setErrorMsg(error.message);
-
-        setTimeout(() => {
-          setMessage(false);
-        }, 3000);
-    }
-  }
-
-  const getData = async () => {
-    try {
-        setLoading(true); setLoadingError(false); setDataFetched(false);
-        const res = await axios.get(LINK_URL);
-        const linksData = res.data.link;
-
-        const matchedData = [];
-        for(let link of linksData)
-        {
-          if (link.uniqueId == uniqueId) {
-            matchedData.push(link);
-            setLinkCreds(matchedData);          
-          }
-        }
-        setDataFetched(true);
-    } catch (error) {
-        setLoadingError(true); setDataFetched(true);
-        setMessage(true);
-        setMessageType("error");
-        setErrorMsg("Network error. Please check your internet connection.");
-        setTimeout(() => setMessage(false), 3000);
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getData();
-  }, [])
-  
-
   return (
     <>
       {message && (
@@ -178,39 +112,15 @@ const Links = () => {
             </div>
             <button className='btn' onClick={submit}>Save Link</button>
           </div>
-          
-          <div className="stored-linking-creds">
-              <h1>Stored Links</h1>
-            <div className="stored-link-creds-content">
-              {loading ? (
-                <div className='loading-contains'>
-                  <LoaderSpinner />
-                </div>
-              ) : loadingError ? (
-                <p className="media-info-msg">Network error. Please check your internet connection.</p>
-              ) : linkCreds.length === 0 ? (
-                <p className="media-info-msg">No saved links available.</p>
-              ) : (
-                linkCreds.map((val, key) => (
-                  <div className="link-cred-container" key={key}>
-                    <div className="crud-opt">
-                      <FaEdit title='Edit' className="icon edit-icon" onClick={() => handleEdit(val._id)} />
-                      <FaTrashAlt title='Delete' className="icon delete-icon"
-                        onClick={() => handleDelete(val._id)} />
-                    </div>
-                    <h2 className="link-title">Platform</h2>
-                    <p className="link-value">{val.plateform}</p>
-                    <h2 className="link-title">Link</h2>
-                    <a href={val.link} className="link-url" target="_blank" rel="noopener noreferrer">
-                      {val.link}
-                    </a>
-                  </div>
-                ))
-              )}
+          <div className="see-creds-card">
+            <div className="see-creds-text">
+              <h3>Want to check your saved credentials Links?</h3>
+              <p>You can view, edit, or manage all your stored Link Creds.</p>
             </div>
-
+            <button className="see-creds-btn" onClick={() => navigate('/link-creds')}>
+              Go to Links
+            </button>
           </div>
-
         </div>
       </div>
     </>

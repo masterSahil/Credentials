@@ -107,6 +107,38 @@
   font-size: 22px;
   padding-right: 15px;
 }
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.logout-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.delete-btn {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #b91c1c;
+}
+
 @media (max-width: 700px) {
   .settings {
     width: 80vw;

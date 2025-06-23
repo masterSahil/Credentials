@@ -2,12 +2,20 @@ import React, { useContext, useEffect, useState } from 'react'
 import '../../css/Menu/menu.css'
 import { useNavigate } from 'react-router-dom'
 import { registeredContext } from '../Context/Context';
-import { FaBars, FaCog, FaImage, FaKey, FaLink, FaSignOutAlt } from "react-icons/fa";
+import { FaBars, FaCog, FaImage, FaKey, FaLink, FaSignOutAlt, FaTrash } from "react-icons/fa";
+import axios from 'axios';
+import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
+import { IoClose } from 'react-icons/io5';
+import '../../css/toaster/toaster.css';
 
 const Menu = () => {
 
     const [menu, setMenu] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+    const [successMsg, setSuccessMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+    const [messageType, setMessageType] = useState('');
+    const [message, setMessage] = useState(false);
 
     const navigate = useNavigate();
     const register = useContext(registeredContext);
@@ -21,27 +29,56 @@ const Menu = () => {
         navigate('/');
     }
 
+    // const URL = "https://credentials-zpxg.onrender.com";
+    // const deleteAcc = async () => {
+    //     const uniqueId = localStorage.getItem("uniqueId");
+    //     try {
+    //         const res = await axios.get(`${URL}/users`);
+
+    //         const users = res.data.user;
+    //         for(let user of users)
+    //         {
+    //             if(user.uniqueId === uniqueId)
+    //             {
+    //                 await axios.delete(`${URL}/users/${user._id}`);
+    //                 logout();
+    //             }
+    //         }
+    //     } catch (error) {
+    //         setMessage(true); setMessageType("error");
+    //         setErrorMsg("Error! Account Deleting Unsuccessfull");
+    //         setTimeout(() => setMessage(false), 3000);
+    //     }
+    // }
+
     useEffect(() => {
     const handleResize = () => {
         const mobile = window.innerWidth < 800;
         setIsMobile(mobile);
 
-        // If screen is large, force menu to true
         if (!mobile) {
         setMenu(true);
         }
     };
-
-    // Initial check
     handleResize();
-
-    // Listen for resize
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
     }, []);
 
   return (
     <>
+        {message && (
+            <div className={`toast-msg ${messageType}`}>
+                <div className="progress-bar"></div>
+                <span className="icon">
+                    {messageType === 'success' ? <AiOutlineCheckCircle size={24} /> : <AiOutlineWarning size={24} />}
+                </span>
+                <p>{messageType === 'success' ? successMsg : errorMsg}</p>
+                <button className="close-btn" onClick={() => setMessage(false)}>
+                    <IoClose size={22} />
+                </button>
+            </div>
+        )}
         <div className="responsive-menu" onClick={()=>setMenu(!menu)}>
             <FaBars className="menu-icon" />
         </div>
@@ -62,9 +99,11 @@ const Menu = () => {
                 <h2><FaCog className='react-icons' /> Settings</h2>
             </div>
             <div className="sub-menus" onClick={logout}>
-                
                 <h2><FaSignOutAlt className='react-icons' />  Logout</h2>
             </div>
+            {/* <div className="sub-menus" onClick={deleteAcc}>
+                <h2><FaTrash className='react-icons' /> Delete Account</h2>
+            </div> */}
         </div>
     </>
   )

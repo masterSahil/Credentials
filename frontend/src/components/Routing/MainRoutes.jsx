@@ -11,6 +11,9 @@ import { registeredContext } from '../Context/Context'
 import Details from '../Dashboard/Details'
 import EditLink from '../Dashboard/EditLink'
 import EditMedia from '../Dashboard/EditMedia'
+import Vault from '../Dashboard/Vault'
+import LinkVault from '../Dashboard/LinkVault'
+import MediaVault from '../Dashboard/MediaVault'
 
 const MainRoutes = () => {
     
@@ -34,6 +37,9 @@ const MainRoutes = () => {
             <Route path="/credential-details/:id" element={<Details />} />
             <Route path='/edit-cred-link/:id' element={<EditLink />} />
             <Route path='/media-edits/:id' element={<EditMedia />} />
+            <Route path='/vault-creds' element={<Vault />} />
+            <Route path='/link-creds' element={<LinkVault />} />
+            <Route path='/media-creds' element={<MediaVault />} />
         </Routes>
     </>
   )

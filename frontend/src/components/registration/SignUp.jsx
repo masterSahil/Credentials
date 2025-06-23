@@ -42,7 +42,6 @@ const SignUp = () => {
 
             await axios.post(URL, newUser);
 
-            alert("Successfull");
             contextId.setMainId(userId);
             registerContext.setRegistered(true);
             localStorage.setItem("isLoggedIn", "true");

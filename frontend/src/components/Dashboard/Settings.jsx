@@ -6,7 +6,6 @@ import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
-import LoaderSpinner from '../loader/loader';
 
 const Settings = () => {
 
