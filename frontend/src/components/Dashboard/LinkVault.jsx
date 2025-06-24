@@ -35,7 +35,6 @@ const LinkVault = () => {
 
             setTimeout(() => {
                 setMessage(false);
-                getData();
             }, 3000);
         } catch (error) {
             setMessage(true);
