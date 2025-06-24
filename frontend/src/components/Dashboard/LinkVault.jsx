@@ -81,7 +81,7 @@ const LinkVault = () => {
 
   return (
     <>
-        {(message) && (
+        {(message || loading) && (
             <div className={`toast-msg ${messageType}`}>
                 <div className="progress-bar"></div>
                 <span className="icon">
