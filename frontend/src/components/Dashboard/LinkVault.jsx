@@ -34,6 +34,7 @@ const LinkVault = () => {
             setMessage(true);
             setMessageType("success");
             setSuccessMsg("Credential Deleted Successfully ...");
+            getData();
 
             setTimeout(() => {
                 setMessage(false);
