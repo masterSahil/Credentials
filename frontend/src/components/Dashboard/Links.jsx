@@ -55,7 +55,6 @@ const Links = () => {
         setMessage(true);
         setMessageType("success");
         setSuccessMsg("Data Added Successfully");
-        getData();
 
         setTimeout(() => {
           setMessage(false);

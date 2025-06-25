@@ -5,6 +5,8 @@ import '../../css/toaster/toaster.css';
 import '../../css/Dashboard/link.css'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
+import { IoClose } from 'react-icons/io5';
 
 const LinkVault = () => {
 
@@ -32,10 +34,10 @@ const LinkVault = () => {
             setMessage(true);
             setMessageType("success");
             setSuccessMsg("Credential Deleted Successfully ...");
+            getData();
 
             setTimeout(() => {
                 setMessage(false);
-                window.location.reload();
             }, 3000);
         } catch (error) {
             setMessage(true);
@@ -82,7 +84,7 @@ const LinkVault = () => {
 
   return (
     <>
-        {(message) && (
+        {message && (
             <div className={`toast-msg ${messageType}`}>
                 <div className="progress-bar"></div>
                 <span className="icon">
