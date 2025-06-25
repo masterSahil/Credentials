@@ -64,6 +64,7 @@ const Login = () => {
               setMessage(true);
               setMessageType("success");
               setSuccessMsg("Logged In Successfully");
+              setPasswordErr('');
               registerContext.setRegistered(true);
 
               setTimeout(() => {
