@@ -95,6 +95,26 @@ const Settings = () => {
       setUserData(prev => ({...prev, [e.target.name]: e.target.value}));
     }
 
+  const URL2 = "https://credentials-zpxg.onrender.com";
+  const deleteAcc = async () => {
+    const uniqueId = localStorage.getItem("uniqueId");
+    try {
+      const res = await axios.get(`${URL}/users`);
+
+      const users = res.data.user;
+      for (let user of users) {
+        if (user.uniqueId === uniqueId) {
+          await axios.delete(`${URL}/users/${user._id}`);
+          logout();
+        }
+      }
+    } catch (error) {
+      setMessage(true); setMessageType("error");
+      setErrorMsg("Error! Account Deleting Unsuccessfull");
+      setTimeout(() => setMessage(false), 3000);
+    }
+  }
+
     useEffect(() => {
       getData();
     }, [])
