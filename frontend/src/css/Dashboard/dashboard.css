@@ -29,6 +29,20 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 2vw;
+    position: relative;
+}
+.toglle2 {
+    position: absolute;
+    right: 4vw;
+    bottom: 70px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #555;
+    transition: transform 0.2s ease;
+}
+.togglle2:hover {
+    transform: scale(1.1);
+    color: #000;
 }
 .web-creds-fields input, .web-creds-fields textarea{
     width: 70vw !important;

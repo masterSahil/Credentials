@@ -4,6 +4,7 @@ import signUpIllustration from '../../assets/imgs/signupillu.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { registeredContext, uniqueIdContext } from '../Context/Context'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const SignUp = () => {
 
@@ -16,6 +17,7 @@ const SignUp = () => {
     const [usernameErr, setUsernameErr] = useState('');
     const [emailErr, setEmailErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -139,8 +141,15 @@ const SignUp = () => {
                             value={user.email} onChange={handelChange} />
                             {emailErr && <p className='err-para'> {emailErr} </p> }
 
-                            <input type="password" placeholder="Create Password" name='password'
-                            value={user.password} onChange={handelChange} />
+                            <div className="password-input-wrapper">
+                                <input type={showPassword ? "text" : "password"} placeholder="Create Password"
+                                name="password" value={user.password} onChange={handelChange} />
+                                {user.password.length > 0 && (
+                                <span className="toggle-password" onClick={() => setShowPassword(!showPassword)} >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </span>
+                                )}
+                            </div>
                             {passwordErr && <p className='err-para'> {passwordErr} </p> }
 
                             <button className="primary-btn" onClick={submit}>Sign Up</button>

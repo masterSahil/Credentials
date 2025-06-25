@@ -6,6 +6,7 @@ import { registeredContext } from '../Context/Context';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
 import '../../css/toaster/toaster.css'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
 
@@ -16,6 +17,7 @@ const Login = () => {
 
   const [emailErr, setEmailErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -50,14 +52,14 @@ const Login = () => {
         let valid = true;
         for(let p of persons)
         {
-          if (p.email != Data.email) {
+          if (Data.email != p.email) {
             setEmailErr("This Email is Invalid");
             valid = false;
           }
-          else if (p.email == Data.email) {
+          else if (Data.email === p.email) {
             setEmailErr('');
 
-            if (p.password == Data.password) {
+            if (Data.password === p.password) {
               setPasswordErr('');
               setMessage(true);
               setMessageType("success");
@@ -117,15 +119,19 @@ const Login = () => {
                 value={Data.email} onChange={handleChange} />
                 {emailErr && <p className='err-para'> {emailErr} </p> }
 
-              <input type="password" placeholder="Your Password" name='password'
-                value={Data.password} onChange={handleChange} />
-                {passwordErr && <p className='err-para'> {passwordErr} </p> }
-
+                <div className="password-input-wrapper">
+                  <input type={showPassword ? "text" : "password"} placeholder="Your Password"
+                    name="password" value={Data.password} onChange={handleChange} />
+                  {Data.password.length > 0 && (
+                    <span className="toggle-password" onClick={() => setShowPassword(!showPassword)} >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                  )}
+                </div>
+                {passwordErr && <p className="err-para"> {passwordErr} </p>}
               <button type="submit" className="primary-btn" onClick={login}>Login</button>
             </form>
-
             <div className="divider">or</div>
-
             <button className="secondary-btn" onClick={()=>navigate('/')}>Sign Up</button>
           </div>
         </div>

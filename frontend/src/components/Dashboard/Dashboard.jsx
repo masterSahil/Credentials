@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineCheckCircle, AiOutlineWarning } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
 import '../../css/toaster/toaster.css'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Dashboard = () => {
     const [userName, setUserName] = useState('');
@@ -20,6 +21,7 @@ const Dashboard = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [messageType, setMessageType] = useState('');
     const [message, setMessage] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const URL_USERS = "https://credentials-zpxg.onrender.com/users";
     const URL_WEB = "https://credentials-zpxg.onrender.com/web";
@@ -154,8 +156,14 @@ const Dashboard = () => {
                         </div>
                         <div className="web-creds-fields">
                             <label>Password: </label>
-                            <input type="password" name="password" placeholder='Your Password'
-                                value={userData.password} onChange={handleChange} />
+                            <input type={showPassword ? "text" : "password"}
+                             name="password" placeholder='Your Password'
+                            value={userData.password} className='web-pwd-toggle' onChange={handleChange} />
+                            {userData.password.length > 0 && (
+                                <span className="toggle-password toglle2" onClick={() => setShowPassword(!showPassword)} >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </span>
+                            )}
                         </div>
                         <button className='btn' onClick={submit}>Save</button>
                     </div>
