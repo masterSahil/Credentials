@@ -136,6 +136,7 @@ const EditMedia = () => {
         navigate('/cloud-medias');
       }, 3000);
     } catch (error) {
+      console.log(error);
       setMessage(true);
       setMessageType("error");
       setErrorMsg("Error Updating The Data");
