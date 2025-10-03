@@ -72,6 +72,11 @@ const updateImg = async (req, res) => {
         updateImage.image = req.file.filename;
         await updateImage.save();
 
+        res.status(200).json({
+            success: true,
+            data: updateImage,
+        });
+
     } catch (error) {
         res.status(500).json({
             success: false,
