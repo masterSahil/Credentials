@@ -59,9 +59,14 @@ const updateImgData = async (req, res) => {
 
 const updateImg = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const updateImage = await imgSchema.findById(id);
 
+        if (!updateImage) {
+            return res.status(404).json({ success: false, message: "Image not found" });
+        }
+
+        // Delete old file only if exists and file present on disk
         if (updateImage.image) {
             const file_path = path.join(__dirname, '../uploads/', updateImage.image);
             if (fs.existsSync(file_path)) {
@@ -69,7 +74,11 @@ const updateImg = async (req, res) => {
             }
         }
 
-        updateImage.image = req.file.filename;
+        // Only update if a new file was uploaded
+        if (req.file) {
+            updateImage.image = req.file.filename;
+        }
+
         await updateImage.save();
 
         res.status(200).json({
@@ -78,12 +87,14 @@ const updateImg = async (req, res) => {
         });
 
     } catch (error) {
+        console.error("Update Error:", error.message);
         res.status(500).json({
             success: false,
             message: error.message,
         });
     }
-}
+};
+
 
 const deleteImgData = async (req, res) => {
     try {
