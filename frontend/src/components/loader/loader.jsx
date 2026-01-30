@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../css/loader/loader.css'; // make sure this path is correct
 
 const LoaderSpinner = () => {
   return (

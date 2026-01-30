@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import MainRoutes from "./components/Routing/MainRoutes";
 import {BrowserRouter as Router } from "react-router-dom";
 import { registeredContext, uniqueIdContext } from "./components/Context/Context";
