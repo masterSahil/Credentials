@@ -1,189 +1,109 @@
 const imgSchema = require('../model/img');
-const path = require('path');
-const fs = require('fs');
+const cloudinary = require("../database/cloudinary"); 
 
-const getImgData = async (req, res) => {
+// FETCH ALL
+exports.getImgData = async (req, res) => {
     try {
         const data = await imgSchema.find();
-
-        res.status(200).json({
-            success: true,
-            data: data,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-}
-
-const createImgData = async (req, res) => {
-    try {
-        const {name, uniqueId, desc} = req.body;
-
-        const data = new imgSchema(req.file ? {image: req.file.filename, name, uniqueId, desc} : {name, uniqueId, desc} );
-
-        await data.save();
-
-        res.status(200).json({
-            success: true,
-            data: data,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-}
-
-const updateImgData = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const {name, image, uniqueId, desc} = req.body;
-
-        const data = await imgSchema.findByIdAndUpdate(id, {name, image, uniqueId, desc}, {new: true});
-
-        res.status(200).json({
-            success: true,
-            data: data,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-}
-
-const updateImg = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updateImage = await imgSchema.findById(id);
-
-        if (!updateImage) {
-            return res.status(404).json({ success: false, message: "Image not found" });
-        }
-
-        // Delete old file if it exists on disk
-        if (updateImage.image) {
-            const file_path = path.join(__dirname, '../uploads/', updateImage.image);
-            if (fs.existsSync(file_path)) {
-                fs.unlinkSync(file_path);
-            }
-        }
-
-        // Update only if a new file is uploaded
-        if (req.file) {
-            updateImage.image = req.file.filename;
-        }
-
-        await updateImage.save();
-
-        res.status(200).json({
-            success: true,
-            data: updateImage,
-        });
-
-    } catch (error) {
-        console.error("Update Error:", error); // Log full error to see cause
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-};
-
-const deleteImgData = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const data = await imgSchema.findByIdAndDelete(id);
-
-        if (data.image) {
-            const file_path = path.join(__dirname, '../uploads/', data.image);
-            if (fs.existsSync(file_path)) {
-                fs.unlinkSync(file_path);
-            }
-        }
-
-        res.status(200).json({
-            success: true,
-            data: data,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-}
-
-const deleteImage = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const data2 = await imgSchema.findById(id);
-
-        if (data2.image) {
-            const file_path = path.join(__dirname, '../uploads/', data2.image);
-            if (fs.existsSync(file_path)) {
-                fs.unlinkSync(file_path);
-            }
-        }
-
-        data2.image = null;
-        await data2.save();
-
-        res.status(200).json({
-            success: true,
-            data: data2,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
-}
-
-const downloadImage = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const data = await imgSchema.findById(id);
-
-        if (!data || !data.image) {
-            return res.status(404).json({ success: false, message: "File not found" });
-        }
-
-        const filePath = path.join(__dirname, '../uploads', data.image);
-
-        if (fs.existsSync(filePath)) {
-            return res.download(filePath); // ✅ This forces file download
-        } else {
-            return res.status(404).json({ success: false, message: "File not found on disk" });
-        }
+        res.status(200).json({ success: true, data });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
 };
 
-const checkImageExists = async (req, res) => {
+// CREATE
+exports.createImgData = async (req, res) => {
     try {
-        const { id } = req.params;
-        const data = await imgSchema.findById(id);
+        const { name, uniqueId, desc } = req.body;
+        if (!req.file) return res.status(400).json({ success: false, message: "No file uploaded." });
 
-        if (!data || !data.image) {
-            return res.status(200).json({ exists: false });
-        }
+        const newData = new imgSchema({
+            name,
+            uniqueId,
+            desc,
+            imageUrl: req.file.path,
+            imagePublicId: req.file.filename // Multer-storage-cloudinary uses .filename for public_id
+        });
 
-        const filePath = path.join(__dirname, '../uploads', data.image);
-        const exists = fs.existsSync(filePath);
-
-        return res.status(200).json({ exists });
+        await newData.save();
+        res.status(201).json({ success: true, data: newData });
     } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 
+// UPDATE ACTUAL FILE (Replace Cloudinary asset)
+exports.updateImg = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const record = await imgSchema.findById(id);
 
-module.exports = {getImgData, createImgData, updateImg, updateImgData, deleteImage, deleteImgData, downloadImage, checkImageExists};
+        if (!record) return res.status(404).json({ success: false, message: "Media not found" });
+
+        if (req.file) {
+            // Delete old file from Cloudinary if it exists
+            if (record.imagePublicId) {
+                await cloudinary.uploader.destroy(record.imagePublicId);
+            }
+            // Update database with new Cloudinary info
+            record.imageUrl = req.file.path;
+            record.imagePublicId = req.file.filename;
+            await record.save();
+        }
+
+        res.status(200).json({ success: true, data: record });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// UPDATE METADATA (Name and Description)
+exports.updateImgData = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, desc } = req.body;
+        const updated = await imgSchema.findByIdAndUpdate(id, { name, desc }, { new: true });
+        res.status(200).json({ success: true, data: updated });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// DELETE ENTRY AND FILE
+exports.deleteImgData = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await imgSchema.findByIdAndDelete(id);
+
+        if (data?.imagePublicId) {
+            // Resource type "auto" helps if it's a video
+            await cloudinary.uploader.destroy(data.imagePublicId, { resource_type: 'image' });
+            // If it might be a video, Cloudinary usually needs explicit resource_type: 'video'
+            await cloudinary.uploader.destroy(data.imagePublicId, { resource_type: 'video' });
+        }
+
+        res.status(200).json({ success: true, message: "Deleted successfully." });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// HELPERS
+exports.downloadImage = async (req, res) => {
+    try {
+        const data = await imgSchema.findById(req.params.id);
+        if (!data?.imageUrl) return res.status(404).send("File not found");
+        res.redirect(data.imageUrl);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.checkImageExists = async (req, res) => {
+    try {
+        const data = await imgSchema.findById(req.params.id);
+        res.status(200).json({ exists: !!data?.imageUrl });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

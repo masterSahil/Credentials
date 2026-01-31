@@ -178,7 +178,7 @@ const Vault = () => {
                             credData.map((val) => (
                                 <div key={val._id} className="card-glow relative group bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-10 transition-all duration-300">
                                     
-                                    <div className="absolute top-8 right-8 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div className="absolute top-8 right-8 flex gap-3 opacity-100 transition-opacity">
                                         <button onClick={() => handleEdit(val._id)} className="p-4 bg-indigo-600/20 text-indigo-400 rounded-2xl hover:bg-indigo-600 hover:text-white transition-all shadow-lg shadow-indigo-600/20">
                                             <FaEdit size={18} />
                                         </button>
