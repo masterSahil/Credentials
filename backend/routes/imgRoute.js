@@ -2,7 +2,8 @@ const express = require('express');
 const imgRouter = express.Router();
 const multer = require('multer');
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("../database/cloudinary");
+const cloudinary = require("../database/cloud");
+
 const { 
     getImgData, 
     createImgData, 

@@ -1,5 +1,5 @@
 const imgSchema = require('../model/img');
-const cloudinary = require("../database/cloudinary"); 
+const cloudinary = require("../database/cloud"); 
 
 // FETCH ALL
 exports.getImgData = async (req, res) => {
