@@ -104,19 +104,78 @@ const MediaVault = () => {
 
             {/* DELETE MODAL */}
             {showDeleteModal && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
-                    <div className="absolute inset-0 bg-black/85 backdrop-blur-md" onClick={() => setShowDeleteModal(false)}></div>
-                    <div className="relative bg-[#0b032d] border border-white/10 rounded-xl p-10 max-w-lg w-full shadow-2xl animate-scale-up text-center">
-                        <div className="w-24 h-24 bg-rose-500/10 rounded-xl flex items-center justify-center text-rose-500 mx-auto mb-8 border border-rose-500/20">
-                            <FaExclamationTriangle size={40} />
+                <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 py-6 sm:p-6">
+
+                    {/* Backdrop */}
+                    <div
+                        className="absolute inset-0 bg-black/85 backdrop-blur-md"
+                        onClick={() => setShowDeleteModal(false)}
+                    ></div>
+
+                    {/* Modal Box */}
+                    <div className="relative bg-[#0b032d] border border-white/10 rounded-xl 
+                                    p-6 sm:p-8 md:p-10 
+                                    max-w-sm sm:max-w-md md:max-w-lg w-full 
+                                    shadow-2xl animate-scale-up text-center">
+
+                        {/* Icon */}
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 
+                                        bg-rose-500/10 rounded-xl 
+                                        flex items-center justify-center 
+                                        text-rose-500 mx-auto mb-5 sm:mb-6 md:mb-8 
+                                        border border-rose-500/20">
+
+                            <FaExclamationTriangle size={28} className="sm:hidden" />
+                            <FaExclamationTriangle size={34} className="hidden sm:block md:hidden" />
+                            <FaExclamationTriangle size={40} className="hidden md:block" />
+
                         </div>
-                        <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4">Purge Cloud Asset?</h3>
-                        <p className="text-gray-400 text-lg font-medium mb-10 leading-relaxed">
+
+                        {/* Title */}
+                        <h3 className="text-xl sm:text-2xl md:text-3xl 
+                                    font-black text-white uppercase tracking-tighter 
+                                    mb-3 sm:mb-4">
+
+                            Purge Cloud Asset?
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-gray-400 
+                                    text-sm sm:text-base md:text-lg 
+                                    font-medium mb-6 sm:mb-8 md:mb-10 
+                                    leading-relaxed">
+
                             This will permanently delete the file from both our vault and Cloudinary servers.
                         </p>
-                        <div className="flex gap-6">
-                            <button onClick={() => setShowDeleteModal(false)} className="flex-1 py-5 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl transition-all uppercase tracking-widest text-xs">Cancel</button>
-                            <button onClick={confirmDelete} className="flex-1 py-5 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-xl transition-all shadow-lg shadow-rose-600/30 uppercase tracking-widest text-xs">Confirm Purge</button>
+
+                        {/* Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6">
+
+                            {/* Cancel */}
+                            <button
+                                onClick={() => setShowDeleteModal(false)}
+                                className="flex-1 py-3 sm:py-4 md:py-5 
+                                        bg-white/5 hover:bg-white/10 
+                                        text-white font-bold rounded-xl 
+                                        transition-all uppercase tracking-widest 
+                                        text-[10px] sm:text-xs"
+                            >
+                                Cancel
+                            </button>
+
+                            {/* Confirm */}
+                            <button
+                                onClick={confirmDelete}
+                                className="flex-1 py-3 sm:py-4 md:py-5 
+                                        bg-rose-600 hover:bg-rose-500 
+                                        text-white font-black rounded-xl 
+                                        transition-all shadow-lg shadow-rose-600/30 
+                                        uppercase tracking-widest 
+                                        text-[10px] sm:text-xs"
+                            >
+                                Confirm Purge
+                            </button>
+
                         </div>
                     </div>
                 </div>
