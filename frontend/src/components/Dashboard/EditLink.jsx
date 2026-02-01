@@ -84,7 +84,7 @@ const EditLink = () => {
 
             {/* --- TOAST / LOADING NOTIFICATION --- */}
             {(message || loading) && (
-                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-5 px-8 py-6 rounded-3xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-5 px-8 py-6 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
                     loading ? 'bg-indigo-500/15 border-indigo-500/50 text-indigo-400' : 
                     messageType === 'success' ? 'bg-indigo-500/15 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/15 border-rose-500/50 text-rose-400'
                 }`}>
@@ -114,7 +114,7 @@ const EditLink = () => {
                     </div>
 
                     {/* Edit Form Card */}
-                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-10 md:p-14 shadow-2xl relative overflow-hidden">
+                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl p-10 md:p-14 shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/5 blur-[100px] rounded-full"></div>
                         
                         <div className="space-y-10">
@@ -129,7 +129,7 @@ const EditLink = () => {
                                     value={formData.plateform}
                                     onChange={handleChange}
                                     placeholder="Enter platform name (e.g., YouTube)"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-8 py-5 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                 />
                             </div>
 
@@ -144,7 +144,7 @@ const EditLink = () => {
                                     value={formData.link}
                                     onChange={handleChange}
                                     placeholder="Enter the URL"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all font-mono"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-8 py-5 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all font-mono"
                                 />
                             </div>
 
@@ -152,7 +152,7 @@ const EditLink = () => {
                             <div className="pt-8 border-t border-white/10">
                                 <button 
                                     onClick={handleUpdate} 
-                                    className="shimmer-btn w-full md:w-max px-16 py-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-xs rounded-2xl transition-all shadow-2xl shadow-indigo-600/30 active:scale-95 flex items-center justify-center gap-4"
+                                    className="shimmer-btn w-full md:w-max px-16 py-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-xs rounded-lg transition-all shadow-2xl shadow-indigo-600/30 active:scale-95 flex items-center justify-center gap-4"
                                 >
                                     <FaSave size={18} /> Update Resource
                                 </button>

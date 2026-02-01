@@ -91,7 +91,7 @@ const Settings = () => {
 
             {/* --- TOAST / LOADING NOTIFICATION --- */}
             {(message || loading) && (
-                <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-2xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+                <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
                     loading ? 'bg-indigo-500/10 border-indigo-500/50 text-indigo-400' : 
                     messageType === 'success' ? 'bg-indigo-500/10 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/10 border-rose-500/50 text-rose-400'
                 }`}>
@@ -111,14 +111,14 @@ const Settings = () => {
                     <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div>
                             <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
-                                Account <span className="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent italic">Settings</span>
+                                Account <span className="bg-linear-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent italic">Settings</span>
                             </h1>
                             <p className="text-gray-500 mt-2 font-semibold tracking-wide flex items-center gap-2">
                                <FaUserEdit className="text-indigo-500/50" /> Manage your personal information and security.
                             </p>
                         </div>
-                        <div className="flex items-center gap-4 bg-white/5 p-4 rounded-3xl border border-white/10">
-                            <div className="h-12 w-12 rounded-2xl bg-indigo-600/20 flex items-center justify-center text-indigo-400">
+                        <div className="flex items-center gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
+                            <div className="h-12 w-12 rounded-lg bg-indigo-600/20 flex items-center justify-center text-indigo-400">
                                 <FaUserCircle size={28} />
                             </div>
                             <div>
@@ -129,7 +129,7 @@ const Settings = () => {
                     </div>
 
                     {/* Settings Form Card */}
-                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-[80px] rounded-full"></div>
                         
                         <header className="mb-10 flex items-center gap-4">
@@ -144,14 +144,14 @@ const Settings = () => {
                                     <label className="text-gray-500 text-[10px] font-black uppercase tracking-[0.25em] ml-2">Full Name</label>
                                     <input 
                                         type="text" name="userName" value={userData.userName || ''} onChange={handleChange}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                     />
                                 </div>
                                 <div className="space-y-3">
                                     <label className="text-gray-500 text-[10px] font-black uppercase tracking-[0.25em] ml-2">Email Address</label>
                                     <input 
                                         type="email" name="email" value={userData.email || ''} onChange={handleChange}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                     />
                                 </div>
                             </div>
@@ -163,7 +163,7 @@ const Settings = () => {
                                     <div className="relative">
                                         <input 
                                             type={visible ? "text" : "password"} name="password" value={userData.password || ''} onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                            className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                         />
                                         <button onClick={() => setVisible(!visible)} className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500 hover:text-indigo-400">
                                             {visible ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
@@ -174,7 +174,7 @@ const Settings = () => {
                                     <label className="text-gray-500 text-[10px] font-black uppercase tracking-[0.25em] ml-2">Phone Number</label>
                                     <input 
                                         type="number" name="phone" value={userData.phone || ''} onChange={handleChange}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                     />
                                 </div>
                             </div>
@@ -185,7 +185,7 @@ const Settings = () => {
                                     <label className="text-gray-500 text-[10px] font-black uppercase tracking-[0.25em] ml-2">Date of Birth</label>
                                     <input 
                                         type="date" name="dob" value={userData.dob || ''} onChange={handleChange}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                     />
                                 </div>
                                 <div className="space-y-3">
@@ -193,7 +193,7 @@ const Settings = () => {
                                     <input 
                                         type="text" name="gender" value={userData.gender || ''} onChange={handleChange}
                                         placeholder="e.g. Male, Female, Non-binary"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                                     />
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ const Settings = () => {
                                 </div>
                                 <button 
                                     onClick={update}
-                                    className="shimmer-btn w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-2xl transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
+                                    className="shimmer-btn w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-lg transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
                                 >
                                     Update Profile
                                 </button>

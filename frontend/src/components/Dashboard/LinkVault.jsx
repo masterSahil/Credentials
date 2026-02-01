@@ -97,9 +97,9 @@ const LinkVault = () => {
             {showDeleteModal && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
                     <div className="absolute inset-0 bg-black/85 backdrop-blur-md" onClick={() => setShowDeleteModal(false)}></div>
-                    <div className="relative bg-[#0b032d] border border-white/10 rounded-[2.5rem] p-10 max-w-lg w-full shadow-2xl animate-scale-up">
+                    <div className="relative bg-[#0b032d] border border-white/10 rounded-xl p-10 max-w-lg w-full shadow-2xl animate-scale-up">
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-24 h-24 bg-rose-500/10 rounded-3xl flex items-center justify-center text-rose-500 mb-8 border border-rose-500/20">
+                            <div className="w-24 h-24 bg-rose-500/10 rounded-xl flex items-center justify-center text-rose-500 mb-8 border border-rose-500/20">
                                 <FaExclamationTriangle size={40} />
                             </div>
                             <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4">Purge Link?</h3>
@@ -107,10 +107,10 @@ const LinkVault = () => {
                                 Are you sure? This saved resource will be permanently removed from your collection.
                             </p>
                             <div className="flex gap-6 w-full">
-                                <button onClick={() => setShowDeleteModal(false)} className="flex-1 py-5 px-8 bg-white/5 hover:bg-white/10 text-white font-bold rounded-2xl transition-all uppercase tracking-widest text-xs">
+                                <button onClick={() => setShowDeleteModal(false)} className="flex-1 py-5 px-8 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl transition-all uppercase tracking-widest text-xs">
                                     Cancel
                                 </button>
-                                <button onClick={confirmDelete} className="flex-1 py-5 px-8 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-2xl transition-all shadow-lg shadow-rose-600/30 uppercase tracking-widest text-xs">
+                                <button onClick={confirmDelete} className="flex-1 py-5 px-8 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-xl transition-all shadow-lg shadow-rose-600/30 uppercase tracking-widest text-xs">
                                     Confirm Purge
                                 </button>
                             </div>
@@ -121,7 +121,7 @@ const LinkVault = () => {
 
             {/* --- TOAST NOTIFICATIONS --- */}
             {message && (
-                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-5 px-8 py-6 rounded-3xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-5 px-8 py-6 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
                     messageType === 'success' ? 'bg-indigo-500/15 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/15 border-rose-500/50 text-rose-400'
                 }`}>
                     {messageType === 'success' ? <AiOutlineCheckCircle size={28} /> : <AiOutlineWarning size={28} />}
@@ -150,32 +150,32 @@ const LinkVault = () => {
                     {/* Content Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                         {loading ? (
-                            <div className="col-span-full h-80 flex flex-col items-center justify-center gap-6 bg-white/5 rounded-[3rem] border border-white/10">
+                            <div className="col-span-full h-80 flex flex-col items-center justify-center gap-6 bg-white/5 rounded-xl border border-white/10">
                                 <LoaderSpinner />
                                 <p className="text-indigo-400 font-black uppercase tracking-widest text-sm animate-pulse">Accessing Encrypted Links...</p>
                             </div>
                         ) : loadingError ? (
-                            <div className="col-span-full p-16 bg-rose-500/5 border border-rose-500/20 rounded-[3rem] text-center">
+                            <div className="col-span-full p-16 bg-rose-500/5 border border-rose-500/20 rounded-xl text-center">
                                 <AiOutlineWarning size={56} className="text-rose-500 mx-auto mb-6" />
                                 <p className="text-white text-2xl font-bold">Failed to load resource vault.</p>
                                 <button onClick={getData} className="mt-6 text-rose-400 underline text-lg font-bold">Retry Synchronization</button>
                             </div>
                         ) : linkCreds.length === 0 ? (
-                            <div className="col-span-full p-20 bg-white/5 border border-white/10 rounded-[3rem] text-center">
+                            <div className="col-span-full p-20 bg-white/5 border border-white/10 rounded-xl text-center">
                                 <FaLink size={64} className="text-indigo-500/20 mx-auto mb-6" />
                                 <p className="text-gray-400 text-xl font-medium">No saved links detected.</p>
                                 <button onClick={() => navigate('/links')} className="mt-6 text-indigo-400 font-black uppercase tracking-widest text-sm hover:text-white transition-colors">Save New Resource</button>
                             </div>
                         ) : (
                             linkCreds.map((val) => (
-                                <div key={val._id} className="link-card relative group bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-10 transition-all duration-300">
+                                <div key={val._id} className="link-card relative group bg-white/5 backdrop-blur-3xl border border-white/10 rounded-lg p-10 transition-all duration-300">
                                     
                                     {/* Edit/Delete Buttons (Visible on Hover) */}
                                     <div className="absolute top-8 right-8 flex gap-3 opacity-100  transition-opacity">
-                                        <button onClick={() => handleEdit(val._id)} className="p-4 bg-indigo-600/20 text-indigo-400 rounded-2xl hover:bg-indigo-600 hover:text-white transition-all shadow-lg shadow-indigo-600/20">
+                                        <button onClick={() => handleEdit(val._id)} className="p-4 bg-indigo-600/20 text-indigo-400 rounded-lg hover:bg-indigo-600 hover:text-white transition-all shadow-lg shadow-indigo-600/20">
                                             <FaEdit size={18} />
                                         </button>
-                                        <button onClick={() => initiateDelete(val._id)} className="p-4 bg-rose-500/15 text-rose-500 rounded-2xl hover:bg-rose-500 hover:text-white transition-all shadow-lg shadow-rose-500/20">
+                                        <button onClick={() => initiateDelete(val._id)} className="p-4 bg-rose-500/15 text-rose-500 rounded-lg hover:bg-rose-500 hover:text-white transition-all shadow-lg shadow-rose-500/20">
                                             <FaTrashAlt size={18} />
                                         </button>
                                     </div>
@@ -199,7 +199,7 @@ const LinkVault = () => {
                                             
                                             <div className="flex flex-col gap-4">
                                                 <div 
-                                                    className="bg-white/5 rounded-2xl px-6 py-5 border border-white/5 cursor-pointer hover:bg-white/10 transition-colors"
+                                                    className="bg-white/5 rounded-lg p-4 border border-white/5 cursor-pointer hover:bg-white/10 transition-colors"
                                                     onClick={() => toggleReveal(val._id)}
                                                 >
                                                     <p className={`text-sm font-mono break-all leading-relaxed ${revealLink[val._id] ? 'text-indigo-300' : 'text-gray-600 underline decoration-indigo-500/30'}`}>
@@ -211,7 +211,7 @@ const LinkVault = () => {
                                                     href={val.link} 
                                                     target="_blank" 
                                                     rel="noopener noreferrer"
-                                                    className="w-full py-4 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white rounded-xl border border-indigo-600/30 flex items-center justify-center gap-3 font-black uppercase tracking-widest text-[10px] transition-all group/link"
+                                                    className="w-full py-4 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white rounded-lg border border-indigo-600/30 flex items-center justify-center gap-3 font-black uppercase tracking-widest text-[10px] transition-all group/link"
                                                 >
                                                     Visit Website <FaExternalLinkAlt className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
                                                 </a>

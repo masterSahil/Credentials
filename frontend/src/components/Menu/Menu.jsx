@@ -44,7 +44,7 @@ const Menu = () => {
             {/* Mobile Toggle */}
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden fixed top-5 right-5 z-[70] p-4 bg-indigo-600 text-white rounded-2xl shadow-xl shadow-indigo-900/40 active:scale-95 transition-all"
+                className="lg:hidden fixed top-5 right-5 z-[70] p-4 bg-indigo-600 text-white rounded-xl shadow-xl shadow-indigo-900/40 active:scale-95 transition-all"
             >
                 {isOpen ? <IoClose size={22} /> : <FaBars size={22} />}
             </button>
@@ -59,7 +59,7 @@ const Menu = () => {
                 <div className="flex flex-col h-full p-8">
                     
                     {/* Branding */}
-                    <div className="mb-14">
+                    <div onClick={()=>{navigate('/')}} className="mb-14 cursor-pointer">
                         <h1 className="text-2xl font-black text-white tracking-widest uppercase italic">
                             Cred<span className="text-indigo-500">entials</span>
                         </h1>
@@ -73,7 +73,7 @@ const Menu = () => {
                                 key={item.name}
                                 onClick={() => { navigate(item.path); setIsOpen(false); }}
                                 className={`
-                                    shimmer-nav group flex items-center gap-4 px-5 py-4 rounded-2xl cursor-pointer transition-all duration-300
+                                    shimmer-nav group flex items-center gap-4 px-5 py-4 rounded-lg cursor-pointer transition-all duration-300
                                     ${isActive(item.path) 
                                         ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-600/30 translate-x-2' 
                                         : 'text-gray-400 hover:bg-white/5 hover:text-white'}
@@ -91,7 +91,7 @@ const Menu = () => {
                     <div className="mt-auto border-t border-white/10 pt-8">
                         <div
                             onClick={logout}
-                            className="shimmer-nav group flex items-center gap-4 px-5 py-4 rounded-2xl cursor-pointer bg-rose-500/5 text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-300"
+                            className="shimmer-nav group flex items-center gap-4 px-5 py-4 rounded-lg cursor-pointer bg-rose-500/5 text-rose-400 hover:bg-rose-500 hover:text-white transition-all duration-300"
                         >
                             <FaSignOutAlt className="text-xl group-hover:-translate-x-1 transition-transform" />
                             <span className="font-black uppercase tracking-[0.2em] text-[10px]">Logout</span>

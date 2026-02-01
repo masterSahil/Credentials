@@ -29,13 +29,8 @@ const upload = multer({ storage });
 // Routes
 imgRouter.get('/img', getImgData);
 imgRouter.post('/img', upload.single('image'), createImgData);
-
-// ✨ ADDED: Route to update metadata (Name/Desc)
 imgRouter.put('/img/:id', updateImgData); 
-
-// ✨ ADDED: Route to replace actual media file (The one causing the 404)
 imgRouter.put('/image/:id', upload.single('image'), updateImg); 
-
 imgRouter.delete('/img/:id', deleteImgData);
 
 module.exports = imgRouter;

@@ -22,7 +22,7 @@ exports.createImgData = async (req, res) => {
             uniqueId,
             desc,
             imageUrl: req.file.path,
-            imagePublicId: req.file.filename // Multer-storage-cloudinary uses .filename for public_id
+            imagePublicId: req.file.filename 
         });
 
         await newData.save();

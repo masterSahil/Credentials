@@ -124,7 +124,7 @@ const EditMedia = () => {
             return <img src={fileURL} className="h-full w-full object-contain" alt="Preview" />;
         }
         if (['mp4', 'webm', 'ogg', 'mov'].includes(ext)) {
-            return <video src={fileURL} controls className="h-full w-full rounded-2xl" />;
+            return <video src={fileURL} controls className="h-full w-full rounded-xl" />;
         }
         return <img src={filesImg} className="h-48 w-48 object-contain opacity-60" alt="Document" />;
     };
@@ -146,22 +146,22 @@ const EditMedia = () => {
             {showDeleteModal && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
                     <div className="absolute inset-0 bg-black/85 backdrop-blur-md" onClick={() => setShowDeleteModal(false)}></div>
-                    <div className="relative bg-[#0b032d] border border-white/10 rounded-[2.5rem] p-10 max-w-lg w-full shadow-2xl animate-scale-up text-center">
-                        <div className="w-24 h-24 bg-rose-500/10 rounded-3xl flex items-center justify-center text-rose-500 mx-auto mb-8 border border-rose-500/20">
+                    <div className="relative bg-[#0b032d] border border-white/10 rounded-xl p-10 max-w-lg w-full shadow-2xl animate-scale-up text-center">
+                        <div className="w-24 h-24 bg-rose-500/10 rounded-xl flex items-center justify-center text-rose-500 mx-auto mb-8 border border-rose-500/20">
                             <FaExclamationTriangle size={40} />
                         </div>
                         <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4">Purge Asset?</h3>
                         <p className="text-gray-400 text-lg font-medium mb-10 leading-relaxed">This will remove the file from Cloudinary and our Vault forever.</p>
                         <div className="flex gap-6">
-                            <button onClick={() => setShowDeleteModal(false)} className="flex-1 py-5 bg-white/5 text-white font-bold rounded-2xl uppercase tracking-widest text-xs">Cancel</button>
-                            <button onClick={confirmDelete} className="flex-1 py-5 bg-rose-600 text-white font-black rounded-2xl shadow-lg shadow-rose-600/30 uppercase tracking-widest text-xs">Confirm Purge</button>
+                            <button onClick={() => setShowDeleteModal(false)} className="flex-1 py-5 bg-white/5 text-white font-bold rounded-xl uppercase tracking-widest text-xs">Cancel</button>
+                            <button onClick={confirmDelete} className="flex-1 py-5 bg-rose-600 text-white font-black rounded-xl shadow-lg shadow-rose-600/30 uppercase tracking-widest text-xs">Confirm Purge</button>
                         </div>
                     </div>
                 </div>
             )}
 
             {(message || loading) && (
-                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-5 px-8 py-6 rounded-3xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-5 px-8 py-6 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
                     loading ? 'bg-indigo-500/15 border-indigo-500/50 text-indigo-400' :
                     messageType === 'success' ? 'bg-indigo-500/15 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/15 border-rose-500/50 text-rose-400'
                 }`}>
@@ -186,41 +186,41 @@ const EditMedia = () => {
 
                     <div className="grid grid-cols-1 xl:grid-cols-5 gap-10">
                         <div className="xl:col-span-2 space-y-6">
-                            <div className="bg-black/40 border border-white/10 rounded-[2.5rem] h-[400px] flex items-center justify-center overflow-hidden relative shadow-inner">
+                            <div className="bg-black/40 border border-white/10 rounded-xl h-[400px] flex items-center justify-center overflow-hidden relative shadow-inner">
                                 {renderFilePreview()}
                             </div>
                             
                             <div className="grid grid-cols-2 gap-4">
-                                <label className="shimmer-btn flex items-center justify-center gap-3 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/30 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] cursor-pointer transition-all">
+                                <label className="shimmer-btn flex items-center justify-center gap-3 bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/30 py-4 rounded-lg font-black uppercase tracking-widest text-[10px] cursor-pointer transition-all">
                                     <FaCloudUploadAlt size={18} /> Update File
                                     <input type="file" name="image" accept="image/*,video/*" onChange={handleChange} hidden />
                                 </label>
-                                <button onClick={handleOpenLink} className="shimmer-btn flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all">
+                                <button onClick={handleOpenLink} className="shimmer-btn flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 py-4 rounded-lg font-black uppercase tracking-widest text-[10px] transition-all">
                                     <FaExternalLinkAlt size={16} /> Open Link
                                 </button>
-                                <button onClick={() => setShowDeleteModal(true)} className="col-span-2 shimmer-btn flex items-center justify-center gap-3 bg-rose-500/10 hover:bg-rose-600 text-rose-500 hover:text-white border border-rose-500/30 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all">
+                                <button onClick={() => setShowDeleteModal(true)} className="col-span-2 shimmer-btn flex items-center justify-center gap-3 bg-rose-500/10 hover:bg-rose-600 text-rose-500 hover:text-white border border-rose-500/30 py-5 rounded-lg font-black uppercase tracking-widest text-[10px] transition-all">
                                     <FaTrash size={16} /> Purge from Vault
                                 </button>
                             </div>
                         </div>
 
-                        <div className="xl:col-span-3 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-10 md:p-14 shadow-2xl space-y-10">
+                        <div className="xl:col-span-3 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl p-10 md:p-12 shadow-2xl space-y-10">
                             <div className="space-y-10">
                                 <div className="space-y-4">
                                     <label className="text-gray-500 text-xs font-black uppercase tracking-[0.4em] ml-2 flex items-center gap-3">
                                         <FaFileSignature className="text-indigo-500/50" /> Display Name
                                     </label>
-                                    <input type="text" name="name" value={imgData.name} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40" />
+                                    <input type="text" name="name" value={imgData.name} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40" />
                                 </div>
 
                                 <div className="space-y-4">
                                     <label className="text-gray-500 text-xs font-black uppercase tracking-[0.4em] ml-2 flex items-center gap-3">
                                         <FaParagraph className="text-indigo-500/50" /> Description
                                     </label>
-                                    <textarea name="desc" value={imgData.desc} onChange={handleChange} rows="5" className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40 resize-none" />
+                                    <textarea name="desc" value={imgData.desc} onChange={handleChange} rows="5" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/40 resize-none" />
                                 </div>
 
-                                <button onClick={updateMetadata} className="shimmer-btn w-full px-16 py-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-xs rounded-2xl transition-all shadow-2xl shadow-indigo-600/30">
+                                <button onClick={updateMetadata} className="shimmer-btn w-full px-15 py-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-xs rounded-lg transition-all shadow-2xl shadow-indigo-600/30">
                                     Save Metadata
                                 </button>
                             </div>

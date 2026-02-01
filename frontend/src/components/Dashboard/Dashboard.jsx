@@ -79,14 +79,14 @@ const Dashboard = () => {
                             </h1>
                             <p className="text-gray-500 mt-2 font-semibold tracking-wide">Secure your digital keys in the private cloud.</p>
                         </div>
-                        <div className="bg-indigo-500/10 border border-indigo-500/20 px-5 py-3 rounded-2xl flex items-center gap-3 text-indigo-400 shadow-[0_0_20px_rgba(79,70,229,0.1)]">
+                        <div className="bg-indigo-500/10 border border-indigo-500/20 px-5 py-3 rounded-lg flex items-center gap-3 text-indigo-400 shadow-[0_0_20px_rgba(79,70,229,0.1)]">
                             <FaShieldAlt className="animate-pulse" size={20} />
                             <span className="text-[10px] font-black uppercase tracking-[0.2em]">AES-256 Protected</span>
                         </div>
                     </div>
 
                     {/* Store Form Card */}
-                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
+                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-2xl p-8 md:p-12 shadow-2xl">
                         <h2 className="text-2xl font-black text-white uppercase tracking-widest mb-10 flex items-center gap-4">
                             <span className="h-10 w-1.5 bg-indigo-600 rounded-full shadow-[0_0_10px_rgba(79,70,229,0.5)]"></span>
                             New Vault Entry
@@ -104,7 +104,7 @@ const Dashboard = () => {
                                         type="text" name={f.name} value={userData[f.name]}
                                         onChange={(e) => setUserData({...userData, [e.target.name]: e.target.value})}
                                         placeholder={f.ph}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
                                     />
                                 </div>
                             ))}
@@ -127,16 +127,16 @@ const Dashboard = () => {
 
                         <button 
                             onClick={submit}
-                            className="shimmer-btn mt-10 w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-2xl transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
+                            className="shimmer-btn mt-10 w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-lg transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
                         >
                             Commit to Vault
                         </button>
                     </div>
 
                     {/* Secondary Navigation Card */}
-                    <div className="mt-8 bg-gradient-to-r from-indigo-950/30 to-black border border-white/5 rounded-[2rem] p-8 flex flex-col md:flex-row justify-between items-center gap-6 group hover:border-indigo-500/40 transition-all cursor-pointer" onClick={() => navigate('/vault-creds')}>
+                    <div className="mt-8 bg-gradient-to-r from-indigo-950/30 to-black border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row justify-between items-center gap-6 group hover:border-indigo-500/40 transition-all cursor-pointer" onClick={() => navigate('/vault-creds')}>
                         <div className="flex items-center gap-6">
-                            <div className="h-14 w-14 rounded-2xl bg-indigo-600/20 flex items-center justify-center text-indigo-500 shadow-[inset_0_0_15px_rgba(79,70,229,0.1)]">
+                            <div className="h-14 w-14 rounded-lg bg-indigo-600/20 flex items-center justify-center text-indigo-500 shadow-[inset_0_0_15px_rgba(79,70,229,0.1)]">
                                 <FaKey size={24} />
                             </div>
                             <div>
@@ -144,7 +144,7 @@ const Dashboard = () => {
                                 <p className="text-gray-500 text-sm font-medium">Manage your encrypted credentials safely.</p>
                             </div>
                         </div>
-                        <button className="bg-white text-black px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-indigo-50 transition-all flex items-center gap-3">
+                        <button className="bg-white text-black px-8 py-4 rounded-lg font-black uppercase tracking-widest text-[10px] hover:bg-indigo-50 transition-all flex items-center gap-3">
                             Open Vault <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
                         </button>
                     </div>
@@ -154,7 +154,7 @@ const Dashboard = () => {
 
             {/* Toast System */}
             {message && (
-                <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-2xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+                <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
                     messageType === 'success' ? 'bg-indigo-500/10 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/10 border-rose-500/50 text-rose-400'
                 }`}>
                     {messageType === 'success' ? <AiOutlineCheckCircle size={24} /> : <AiOutlineWarning size={24} />}

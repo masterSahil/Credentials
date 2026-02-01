@@ -74,7 +74,7 @@ const Links = () => {
 
             {/* --- TOAST NOTIFICATION --- */}
             {message && (
-                <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-2xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+                <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
                     messageType === 'success' ? 'bg-indigo-500/10 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/10 border-rose-500/50 text-rose-400'
                 }`}>
                     {messageType === 'success' ? <AiOutlineCheckCircle size={24} /> : <AiOutlineWarning size={24} />}
@@ -103,7 +103,7 @@ const Links = () => {
                     </div>
 
                     {/* Link Form Card */}
-                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-[80px] rounded-full"></div>
                         
                         <header className="mb-10 flex items-center gap-4">
@@ -119,7 +119,7 @@ const Links = () => {
                                     <input 
                                         type="text" name="plateform" value={linkData.plateform} onChange={handleChange}
                                         placeholder="e.g. YouTube, Documentation, Portfolio"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
                                     />
                                     <FaExternalLinkAlt className="absolute right-6 top-1/2 -translate-y-1/2 text-indigo-500/30" />
                                 </div>
@@ -132,7 +132,7 @@ const Links = () => {
                                     <input 
                                         type="text" name="link" value={linkData.link} onChange={handleChange}
                                         placeholder="https://example.com/very-useful-page"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all font-mono text-sm"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all font-mono text-sm"
                                     />
                                     <FaLink className="absolute right-6 top-1/2 -translate-y-1/2 text-indigo-500/30" />
                                 </div>
@@ -141,7 +141,7 @@ const Links = () => {
                             {/* Save Button */}
                             <button 
                                 onClick={submit}
-                                className="shimmer-btn mt-4 w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-2xl transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
+                                className="shimmer-btn mt-4 w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-lg transition-all shadow-2xl shadow-indigo-600/30 active:scale-95"
                             >
                                 Secure Link
                             </button>
@@ -149,9 +149,9 @@ const Links = () => {
                     </div>
 
                     {/* Access Vault Card */}
-                    <div className="mt-8 bg-gradient-to-r from-indigo-950/30 to-black border border-white/5 rounded-[2.5rem] p-8 flex flex-col md:flex-row justify-between items-center gap-6 group hover:border-indigo-500/40 transition-all cursor-pointer" onClick={() => navigate('/link-creds')}>
+                    <div className="mt-8 bg-gradient-to-r from-indigo-950/30 to-black border border-white/5 rounded-xl p-8 flex flex-col md:flex-row justify-between items-center gap-6 group hover:border-indigo-500/40 transition-all cursor-pointer" onClick={() => navigate('/link-creds')}>
                         <div className="flex items-center gap-6">
-                            <div className="h-16 w-16 rounded-3xl bg-indigo-600/20 flex items-center justify-center text-indigo-500 shadow-[inset_0_0_20px_rgba(79,70,229,0.15)] transition-transform group-hover:scale-110">
+                            <div className="h-16 w-16 rounded-lg bg-indigo-600/20 flex items-center justify-center text-indigo-500 shadow-[inset_0_0_20px_rgba(79,70,229,0.15)] transition-transform group-hover:scale-110">
                                 <FaLink size={28} />
                             </div>
                             <div>
@@ -159,7 +159,7 @@ const Links = () => {
                                 <p className="text-gray-500 text-sm font-medium">Browse and edit your collection of stored resources.</p>
                             </div>
                         </div>
-                        <button className="bg-white text-black px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-indigo-50 transition-all flex items-center gap-3">
+                        <button className="bg-white text-black px-10 py-4 rounded-lg font-black uppercase tracking-widest text-[11px] hover:bg-indigo-50 transition-all flex items-center gap-3">
                             Open Vault <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
                         </button>
                     </div>

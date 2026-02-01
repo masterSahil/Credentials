@@ -87,7 +87,7 @@ const Details = () => {
 
       {/* --- TOAST / LOADING --- */}
       {(message || loading) && (
-        <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-2xl shadow-2xl border backdrop-blur-3xl animate-toast ${
+        <div className={`fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-5 rounded-xl shadow-2xl border backdrop-blur-3xl animate-toast ${
           loading ? 'bg-indigo-500/10 border-indigo-500/50 text-indigo-400' :
           messageType === 'success' ? 'bg-indigo-500/10 border-indigo-500/50 text-indigo-400' : 'bg-rose-500/10 border-rose-500/50 text-rose-400'
         }`}>
@@ -117,7 +117,7 @@ const Details = () => {
           </div>
 
           {/* Edit Form Card */}
-          <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-[80px] rounded-full"></div>
             
             <div className="space-y-8">
@@ -132,7 +132,7 @@ const Details = () => {
                   value={webCreds.webName}
                   onChange={handleChange}
                   placeholder="Enter website name"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                 />
               </div>
 
@@ -148,7 +148,7 @@ const Details = () => {
                     value={webCreds.userName}
                     onChange={handleChange}
                     placeholder="Username"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                   />
                 </div>
                 <div className="space-y-3">
@@ -161,7 +161,7 @@ const Details = () => {
                     value={webCreds.email}
                     onChange={handleChange}
                     placeholder="Email"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all"
                   />
                 </div>
               </div>
@@ -178,7 +178,7 @@ const Details = () => {
                     value={webCreds.password}
                     onChange={handleChange}
                     placeholder="Enter password"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all font-mono"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all font-mono"
                   />
                   <button 
                     onClick={() => setShowPassword(!showPassword)} 
@@ -193,7 +193,7 @@ const Details = () => {
               <div className="pt-6 border-t border-white/5">
                 <button 
                   onClick={handleUpdate} 
-                  className="shimmer-btn w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-2xl transition-all shadow-2xl shadow-indigo-600/30 active:scale-95 flex items-center justify-center gap-3"
+                  className="shimmer-btn w-full md:w-max px-14 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-lg transition-all shadow-2xl shadow-indigo-600/30 active:scale-95 flex items-center justify-center gap-3"
                 >
                   <FaSave size={16} /> Save Changes
                 </button>
