@@ -154,7 +154,7 @@ const Login = () => {
         {/* RIGHT */}
         <div className="flex justify-center lg:justify-end">
 
-            <div className="w-full max-w-md bg-white/5 backdrop-blur border border-white/10 rounded-xl p-10 shadow-2xl">
+            <div className="w-full max-w-md bg-white/5 backdrop-blur border border-white/10 rounded-xl py-10 px-8 shadow-2xl">
 
                 {/* Header */}
                 <div className="mb-8 text-center">
