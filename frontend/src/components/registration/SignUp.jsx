@@ -119,7 +119,7 @@ const SignUp = () => {
 
             {/* --- TOAST --- */}
             {message && (
-                <div className="fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl border backdrop-blur-3xl animate-fade-right bg-rose-500/10 border-rose-500/50 text-rose-400">
+                <div className="fixed top-6 right-6 z-[100] flex items-center gap-4 px-6 py-4 rounded-xl shadow-2xl border backdrop-blur-3xl animate-fade-right bg-rose-500/10 border-rose-500/50 text-rose-400">
                     <AiOutlineWarning size={24} />
                     <span className="font-bold uppercase tracking-widest text-[10px]">{errorMsg}</span>
                     <button onClick={() => setMessage(false)} className="ml-2 hover:rotate-90 transition-transform"><IoClose size={20} /></button>
@@ -148,18 +148,11 @@ const SignUp = () => {
                         <div className="absolute inset-0 bg-indigo-600/20 blur-[100px] rounded-full"></div>
                         <img src={signUpIllustration} alt="Security" className="relative w-full animate-float z-10" />
                     </div>
-
-                    <div className="flex items-center gap-6">
-                        <div className="flex items-center gap-3 bg-white/5 px-6 py-3 rounded-2xl border border-white/10">
-                            <FaShieldAlt className="text-indigo-500" />
-                            <span className="text-white font-bold text-[10px] tracking-[0.2em] uppercase">Enterprise Grade</span>
-                        </div>
-                    </div>
                 </div>
 
                 {/* --- RIGHT SIDE: FORM --- */}
                 <div className="flex items-center justify-center animate-fade-up">
-                    <div className="w-full max-w-[420px] bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 xl:p-12 shadow-2xl relative overflow-hidden">
+                    <div className="w-full max-w-[420px] bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-xl p-8 xl:p-12 shadow-2xl relative overflow-hidden">
                         {/* Decorative glow */}
                         <div className="absolute -top-24 -right-24 w-48 h-48 bg-indigo-600/20 blur-[60px] rounded-full"></div>
                         
@@ -174,7 +167,7 @@ const SignUp = () => {
                                     <input 
                                         type="text" placeholder="Full Name" name='userName'
                                         value={user.userName} onChange={handelChange}
-                                        className={`w-full bg-white/5 border ${usernameErr ? 'border-rose-500/50' : 'border-white/10'} group-hover:border-white/20 rounded-2xl px-12 py-4 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all placeholder:text-gray-700`}
+                                        className={`w-full bg-white/5 border ${usernameErr ? 'border-rose-500/50' : 'border-white/10'} group-hover:border-white/20 rounded-lg px-12 py-4 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all placeholder:text-gray-700`}
                                     />
                                     <FaUserCircle className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-indigo-400 transition-colors" size={18} />
                                 </div>
@@ -186,7 +179,7 @@ const SignUp = () => {
                                     <input 
                                         type="email" placeholder="Email Address" name='email'
                                         value={user.email} onChange={handelChange}
-                                        className={`w-full bg-white/5 border ${emailErr ? 'border-rose-500/50' : 'border-white/10'} group-hover:border-white/20 rounded-2xl px-12 py-4 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all placeholder:text-gray-700`}
+                                        className={`w-full bg-white/5 border ${emailErr ? 'border-rose-500/50' : 'border-white/10'} group-hover:border-white/20 rounded-lg px-12 py-4 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all placeholder:text-gray-700`}
                                     />
                                     <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-indigo-400 transition-colors" size={16} />
                                 </div>
@@ -198,7 +191,7 @@ const SignUp = () => {
                                     <input 
                                         type={showPassword ? "text" : "password"} placeholder="Access Key"
                                         name="password" value={user.password} onChange={handelChange}
-                                        className={`w-full bg-white/5 border ${passwordErr ? 'border-rose-500/50' : 'border-white/10'} group-hover:border-white/20 rounded-2xl px-12 py-4 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all font-mono placeholder:text-gray-700`}
+                                        className={`w-full bg-white/5 border ${passwordErr ? 'border-rose-500/50' : 'border-white/10'} group-hover:border-white/20 rounded-lg px-12 py-4 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-all font-mono placeholder:text-gray-700`}
                                     />
                                     <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-indigo-400 transition-colors" size={16} />
                                     {user.password.length > 0 && (
@@ -210,7 +203,7 @@ const SignUp = () => {
                                 {passwordErr && <p className="text-rose-500 text-[9px] font-black uppercase tracking-widest ml-2">{passwordErr}</p>}
                             </div>
 
-                            <button className="shimmer-btn w-full py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-2xl transition-all shadow-xl shadow-indigo-600/20 active:scale-[0.98]">
+                            <button className="shimmer-btn w-full py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black uppercase tracking-[0.3em] text-[11px] rounded-lg transition-all shadow-xl shadow-indigo-600/20 active:scale-[0.98]">
                                 Authorize Sign Up
                             </button>
                         </form>
@@ -220,7 +213,7 @@ const SignUp = () => {
                             <div className="relative flex justify-center text-[9px] font-black uppercase tracking-widest"><span className="bg-[#0b0324] px-4 text-gray-600 italic">Established User?</span></div>
                         </div>
 
-                        <button onClick={() => navigate('/login')} className="w-full py-4 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl border border-white/5 transition-all active:scale-[0.98]">
+                        <button onClick={() => navigate('/login')} className="w-full py-4 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest text-[10px] rounded-lg border border-white/5 transition-all active:scale-[0.98]">
                             Sign In to Vault
                         </button>
                     </div>

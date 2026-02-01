@@ -154,7 +154,7 @@ const Login = () => {
         {/* RIGHT */}
         <div className="flex justify-center lg:justify-end">
 
-            <div className="w-full max-w-md bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-10 shadow-2xl">
+            <div className="w-full max-w-md bg-white/5 backdrop-blur border border-white/10 rounded-xl p-10 shadow-2xl">
 
                 {/* Header */}
                 <div className="mb-8 text-center">
@@ -178,7 +178,7 @@ const Login = () => {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="Email"
-                    className="w-full bg-black/30 border border-white/10 rounded-xl px-12 py-4 text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full bg-black/30 border border-white/10 rounded-lg px-12 py-4 text-white outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                 </div>
 
@@ -191,7 +191,7 @@ const Login = () => {
                     value={form.password}
                     onChange={handleChange}
                     placeholder="Password"
-                    className="w-full bg-black/30 border border-white/10 rounded-xl px-12 py-4 text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full bg-black/30 border border-white/10 rounded-lg px-12 py-4 text-white outline-none focus:ring-2 focus:ring-indigo-500"
                     />
 
                     <button type="button" onClick={() => setShowPassword(!showPassword) }
@@ -213,7 +213,7 @@ const Login = () => {
 
                 {/* Button */}
                 <button disabled={loading}
-                    className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition flex justify-center items-center gap-2" >
+                    className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition flex justify-center items-center gap-2" >
                     {loading ? ( <FaSpinner className="animate-spin" /> ) : ( "Login" )}
                 </button>
             </form>
@@ -226,7 +226,7 @@ const Login = () => {
             {/* Signup */}
             <button
               onClick={() => navigate("/")}
-              className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl transition text-sm"
+              className="w-full py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg transition text-sm"
             >
               Create New Account
             </button>
