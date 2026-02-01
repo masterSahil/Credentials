@@ -104,7 +104,7 @@ const Dashboard = () => {
                                         type="text" name={f.name} value={userData[f.name]}
                                         onChange={(e) => setUserData({...userData, [e.target.name]: e.target.value})}
                                         placeholder={f.ph}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
                                     />
                                 </div>
                             ))}
@@ -116,7 +116,7 @@ const Dashboard = () => {
                                         type={showPassword ? "text" : "password"} name="password" value={userData.password}
                                         onChange={(e) => setUserData({...userData, password: e.target.value})}
                                         placeholder="••••••••"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4.5 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:bg-white/10 transition-all"
                                     />
                                     <button onClick={() => setShowPassword(!showPassword)} className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
                                         {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
